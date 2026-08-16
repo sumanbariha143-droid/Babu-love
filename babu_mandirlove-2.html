@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>For My Babu 💗</title>
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0; min-height:100vh; display:flex; align-items:center; justify-content:center;
+  font-family:system-ui,-apple-system,Segoe UI,sans-serif;
+  background:linear-gradient(135deg,#ffd6e7,#fff1f6,#ffe0ea);
+  overflow:hidden; color:#5a2840;
+}
+.card{
+  width:min(92vw,520px); min-height:620px; padding:28px 22px;
+  background:rgba(255,255,255,.9); border-radius:28px;
+  box-shadow:0 18px 60px rgba(120,40,75,.2);
+  text-align:center; position:relative; overflow:hidden;
+}
+h1{font-size:25px;margin:8px 0 18px}
+p{font-size:18px;line-height:1.45}
+.art{
+  height:245px; display:flex; align-items:center; justify-content:center;
+  font-size:150px; filter:drop-shadow(0 8px 10px rgba(0,0,0,.12));
+}
+.cat{font-size:145px}
+.rose{font-size:125px}
+.buttons{display:flex;gap:18px;justify-content:center;align-items:center;margin-top:22px;min-height:70px}
+button{
+  border:0;border-radius:999px;padding:13px 28px;font-size:18px;font-weight:700;
+  cursor:pointer;background:#ff5c91;color:#fff;box-shadow:0 8px 18px rgba(255,92,145,.28);
+  touch-action:manipulation;
+}
+button.no{background:#777}
+button:active{transform:scale(.96)}
+.hidden{display:none}
+.next{margin-top:20px;background:#8d5cff}
+.datebox{margin:20px auto;display:grid;gap:12px;max-width:300px;text-align:left}
+.datebox label{font-weight:700}
+input{
+  width:100%;padding:13px;border:2px solid #ffc0d5;border-radius:14px;
+  font-size:16px;background:#fff;
+}
+.small{font-size:13px;opacity:.7}
+#movingNo{position:relative}
+.heart{position:absolute;font-size:22px;animation:float 5s linear infinite;opacity:.55}
+@keyframes float{from{transform:translateY(110vh)}to{transform:translateY(-20vh)}}
+@media(max-width:430px){.card{min-height:590px}.art{height:210px}.cat{font-size:120px}.rose{font-size:105px}h1{font-size:22px}}
+</style>
+</head>
+<body>
+<div class="heart" style="left:8%;animation-delay:0s">💗</div>
+<div class="heart" style="left:82%;animation-delay:1.5s">💕</div>
+<div class="heart" style="left:50%;animation-delay:3s">💖</div>
+
+<main class="card">
+  <section id="s1">
+    <h1>Babu are u angry 😡 ❣️</h1>
+    <div class="art cat">😿</div>
+    <p>🥺 Please tell me...</p>
+    <div class="buttons">
+      <button onclick="go(2)">Yes 💗</button>
+      <button onclick="go(2)">No 🥺</button>
+    </div>
+  </section>
+
+  <section id="s2" class="hidden">
+    <h1>I am sorry rimuuu baby 🐥🍼</h1>
+    <div class="art cat">😿</div>
+    <button class="next" onclick="go(3)">Next 💕</button>
+  </section>
+
+  <section id="s3" class="hidden">
+    <h1>Do u love me baby ❣️</h1>
+    <div class="art rose">💐🌹</div>
+    <div class="buttons" id="loveBtns">
+      <button onclick="go(4)">Yes ❤️</button>
+      <button class="no" id="loveNo">No 🙈</button>
+    </div>
+    <p class="small">No ko pakadna mushkil hai 😜</p>
+  </section>
+
+  <section id="s4" class="hidden">
+    <h1>Ky mere sath Mandir date pe jayegi babu ❣️ 🛕</h1>
+    <div class="art">🛕💗</div>
+    <div class="buttons" id="dateBtns">
+      <button onclick="go(5)">Yes 💕</button>
+      <button class="no" id="dateNo">No 😜</button>
+    </div>
+  </section>
+
+  <section id="s5" class="hidden">
+    <h1>Date & Time 💗</h1>
+    <div class="art">📅⏰</div>
+    <div class="datebox">
+      <label>Date</label>
+      <input id="date" type="date">
+      <label>Time</label>
+      <input id="time" type="time">
+    </div>
+    <button onclick="finish()">Confirm 💖</button>
+  </section>
+
+  <section id="s6" class="hidden">
+    <h1>Thanks u babu 😘😘</h1>
+    <div class="art">🥰💗🌹</div>
+    <p>Our Mandir date is fixed! 🛕✨</p>
+    <p id="chosen"></p>
+  </section>
+</main>
+
+<script>
+function go(n){
+  document.querySelectorAll("section").forEach(x=>x.classList.add("hidden"));
+  document.getElementById("s"+n).classList.remove("hidden");
+}
+function escapeNo(btn){
+  const card=document.querySelector(".card");
+  btn.style.position="fixed";
+  const r=card.getBoundingClientRect();
+  const maxX=Math.max(10, window.innerWidth-btn.offsetWidth-10);
+  const maxY=Math.max(10, window.innerHeight-btn.offsetHeight-10);
+  btn.style.left=(10+Math.random()*(maxX-10))+"px";
+  btn.style.top=(10+Math.random()*(maxY-10))+"px";
+}
+document.getElementById("loveNo").addEventListener("pointerenter",e=>escapeNo(e.currentTarget));
+document.getElementById("loveNo").addEventListener("pointerdown",e=>{e.preventDefault();escapeNo(e.currentTarget)});
+document.getElementById("dateNo").addEventListener("pointerenter",e=>escapeNo(e.currentTarget));
+document.getElementById("dateNo").addEventListener("pointerdown",e=>{e.preventDefault();escapeNo(e.currentTarget)});
+
+function finish(){
+  const d=document.getElementById("date").value;
+  const t=document.getElementById("time").value;
+  if(!d||!t){alert("Date aur time choose karo babu 💗");return}
+  document.getElementById("chosen").textContent="Date: "+d+"  •  Time: "+t;
+  go(6);
+}
+</script>
+</body>
+</html>
